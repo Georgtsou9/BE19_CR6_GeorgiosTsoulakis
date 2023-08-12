@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+{% include "components/hero.html.twig" %}
+<div class="details">
+    <div class="card" style="width: 100%">
+        <div class="card-body">
+            <h2 class="card-title text-primary">{{ event.name }}</h2>
+            <p class="card-text"><span class="text-primary">Description: </span>{{ event.description  ? event.description : 'No description availiable'}}</p>
+        
+            <div>
+                <p class="card-text"><span class="text-primary">When and where:  </span> {{ event.address  ? event.address : 'No location availiable'}}  ||    {{ event.datetime ? event.datetime|date('Y-m-d H:i:s') : 'No date availiable' }}</p>
+            </div>
+            <div>
+                <p class="card-text"><span class="text-primary">Capacity: </span>{{ event.capacity  ? event.capacity  : 'Not availiable'}}</p>
+                <p><span class="text-primary">Link: </span>{{ event.url  ? event.url  : 'Not availiable'}}</p>
+            </div>
+            <div>
+                <p class="card-text"><span class="text-primary">Email: </span>{{ event.email  ? event.email  : 'Not availiable'}}</p>
+                <p><span class="text-primary">Phone Number: </span>{{ event.number  ? event.number  : 'Not availiable'}}</p>
+            </div>
+            <a class="btn btn-primary" href="{{ path('app_events_index') }}">Go back</a>
+            <a class="btn btn-primary" href="{{ path('app_events_edit', {'id': event.id}) }}">Edit event</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
