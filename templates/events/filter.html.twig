@@ -1,1 +1,52 @@
-<h1>hi</h1>
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+
+{% block body %}
+{% include "components/hero.html.twig" %}
+    <div class="mycont">
+        <div>
+            <h1 class="text-primary">Upcoming events:</h1>
+        </div>
+        <div class="mygrid">
+            {% for event in event %}
+    
+            <div class="card" style="width: 24rem;">
+                <img src="{{ event.image ? event.image : '/img/default.jpg'}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-primary">{{ event.name }}</h5>
+                  <span> {{ event.datetime ? event.datetime|date('Y-m-d H:i:s') : 'No date availiable' }}</span>
+                  <br>
+                  <span>{{ event.address  ? event.address : 'No location availiable'}}</span>
+                  <br>
+                  <span>Type: {{ event.type  ? event.type : 'No type availiable'}}</span>
+                  <br>
+                  <div class="mybtn">
+                    <a href="{{ path('app_events_show', {'id': event.id}) }}" class="btn btn-primary">Show More</a>
+                    <a href="{{ path('app_events_edit', {'id': event.id}) }}" class="btn btn-primary">Edit Event</a>
+                  </div>
+                  
+                </div>
+            </div>
+            
+                
+            {% else %}
+                <tr>
+                    <td colspan="12">no records found</td>
+                </tr>
+            {% endfor %}
+            
+            
+            
+            
+            
+            
+            
+            
+    
+        </div>
+    </div>
+    
+
+{% endblock %}

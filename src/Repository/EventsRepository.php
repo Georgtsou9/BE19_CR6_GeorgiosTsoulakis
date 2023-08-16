@@ -21,6 +21,15 @@ class EventsRepository extends ServiceEntityRepository
         parent::__construct($registry, Events::class);
     }
     
+    public function filter($type)
+    {
+        return $this->createQueryBuilder('event')
+        ->setParameter('type', $type)
+           ->andWhere('event.type = :type')
+           ->getQuery()
+           ->getResult()
+       ;
+    }
 
 //    /**
 //     * @return Events[] Returns an array of Events objects

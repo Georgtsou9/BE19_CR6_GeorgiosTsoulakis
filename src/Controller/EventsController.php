@@ -66,6 +66,15 @@ class EventsController extends AbstractController
             'form' => $form,
         ]);
     }
+    
+    #[Route('/filter/{type}', name: 'app_events_filter', methods: ['GET'])]
+    public function filter(EventsRepository $eventsRepository, $type): Response
+    {  
+        return $this->render('events/filter.html.twig',[
+            'event' => $eventsRepository->filter($type)
+        ]);
+        
+    }
 
     #[Route('/{id}', name: 'app_events_delete', methods: ['POST'])]
     public function delete(Request $request, Events $event, EntityManagerInterface $entityManager): Response
@@ -80,11 +89,6 @@ class EventsController extends AbstractController
 
   
     
-    #[Route('/{type}', name: 'app_events_filter', methods: ['GET'])]
-    public function filter(string $type): Response
-    {  
-        return $this->render('events/filter.html.twig');
-        
-    }
+    
 }
 
